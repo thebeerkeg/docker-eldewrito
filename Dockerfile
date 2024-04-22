@@ -36,7 +36,7 @@ RUN apt-get remove -y wget software-properties-common apt-transport-https cabext
     rm -rf .cache/
 
 # Make start script executable and create necessary directories
-RUN chmod +x start.sh && \
+RUN chmod +x /scripts/start.sh && \
     mkdir logs
 
 # Set start command to execute the start script
