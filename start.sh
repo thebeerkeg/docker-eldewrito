@@ -16,10 +16,10 @@ create_default_config()
     echo "Copying default dewrito_prefs.cfg."
     cp /eldewrito/data/dewrito_prefs.cfg $1
 
-    echo "Copying default veto/voting json."
+    echo "Copying default voting json."
 
-    cp /eldewrito/data/server/voting.json.example /config
-    cp /eldewrito/data/server/mods.json.example /config
+    cp /eldewrito/data/server/voting.json.example /config/voting.json
+    cp /eldewrito/data/server/mods.json.example /config/mods.json
 }
 
 echo "Initializing v${CONTAINER_VERSION} for ElDewrito"
