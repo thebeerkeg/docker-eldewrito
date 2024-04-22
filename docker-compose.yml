@@ -1,5 +1,3 @@
-version: '2'
-
 services:
   eldewrito:
     build:
@@ -7,17 +5,15 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - 11774:11774/udp
-      - 11775:11775/tcp
-      - 11776:11776/tcp
-      - 11777:11777/tcp
+      - "11774:11774/udp"
+      - "11775:11775/tcp"
+      - "11776:11776/tcp"
+      - "11777:11777/tcp"
     volumes:
-      - /path/to/game:/game
-      - /path/to/config:/config
-      - /path/to/logs:/logs
+      - ./eldewrito:/game
+      - ./config:/config
+      - ./logs:/logs
     cap_add:
       - SYS_PTRACE
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - INSTANCE_ID=srv1
+    environment:
+      - INSTANCE_ID=server1

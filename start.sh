@@ -22,7 +22,7 @@ create_default_config()
     cp /defaults/voting.json /config
 }
 
-echo "Initializing v${CONTAINER_VERSION} for ElDewrito ${ELDEWRITO_VERSION}"
+echo "Initializing v${CONTAINER_VERSION} for ElDewrito"
 
 # Search for eldorado.exe in game directory
 if [ ! -f "eldorado.exe" ]; then
@@ -30,24 +30,6 @@ if [ ! -f "eldorado.exe" ]; then
 
     sleep 2
     exit 1
-fi
-
-# Checksum the mtndew.dll to confirm we're running the correct version
-if [ -z "${SKIP_CHECKSUM_CHECK}" ]; then
-    checksum=$(md5sum mtndew.dll | awk '{ print $1 }')
-
-    if [ "$checksum" != "${MTNDEW_CHECKSUM}" ]; then
-        echo "${RED}Checksum mismatch! Make sure you are using a valid copy of the game.${NC}"
-        echo "${RED}This container only supports ElDewrito ${ELDEWRITO_VERSION}.${NC}"
-
-        echo "Expected ${checksum}"
-        echo "Got ${MTNDEW_CHECKSUM}"
-
-        sleep 2
-        exit 10
-    fi
-else
-    echo "Skipping checksum check."
 fi
 
 # Create user if container should run as user
