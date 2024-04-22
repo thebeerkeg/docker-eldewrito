@@ -11,7 +11,7 @@ services:
       - "11777:11777/tcp"
     volumes:
       - ./eldewrito:/game
-      - ./config:/config
+      - ./scripts:/scripts
       - ./logs:/logs
     cap_add:
       - SYS_PTRACE

@@ -5,23 +5,6 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 
-# Function to create default configuration depending on path
-create_default_config()
-{
-    echo "${YELLOW}Could not find an existing dewrito_prefs.cfg. Using default.${NC}"
-    echo "${YELLOW}Make sure to adjust important settings like your RCon password!${NC}"
-
-    sleep 5
-
-    echo "Copying default dewrito_prefs.cfg."
-    cp /eldewrito/data/dewrito_prefs.cfg $1
-
-    echo "Copying default voting json."
-
-    cp /eldewrito/data/server/voting.json.example /config/voting.json
-    cp /eldewrito/data/server/mods.json.example /config/mods.json
-}
-
 echo "Initializing v${CONTAINER_VERSION} for ElDewrito"
 
 # Search for eldorado.exe in game directory
@@ -68,33 +51,15 @@ else
     fi
 fi
 
-# Copy configuration files or create default config
-if [ -z "${INSTANCE_ID}" ]; then
-    echo "${YELLOW}Running in single instance mode.${NC}"
-
-    if [ ! -f "dewrito_prefs.cfg" ]; then
-        create_default_config "."
-    fi
-else
-    echo "Running in multi instance mode"
-
-    if [ ! -f "/config/dewrito_prefs.cfg" ]; then
-        create_default_config "/config"
-    fi
-
-    echo "Copying instance configuration"
-    cp /config/dewrito_prefs.cfg dewrito_prefs_${INSTANCE_ID}.cfg
-fi
-
 if [ -z "${SKIP_CHOWN}" ]; then
     echo "Taking ownership of folders"
-    chown -R $PUID:$PGID /game /config /logs /wine
+    chown -R $PUID:$PGID /game /logs /wine
 
     echo "Changing folder permissions"
-    find /game /config /logs -type d -exec chmod 775 {} \;
+    find /game /logs -type d -exec chmod 775 {} \;
 
     echo "Changing file permissions"
-    find /game /config /logs -type f -exec chmod 664 {} \;
+    find /game /logs -type f -exec chmod 664 {} \;
 fi
 
 # Xvfb needs cleaning because it doesn't exit cleanly
