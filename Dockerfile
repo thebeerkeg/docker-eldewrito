@@ -33,7 +33,6 @@ RUN apt-get install -y libvulkan1:i386 && \
 # Cleanup
 RUN apt-get remove -y wget software-properties-common apt-transport-https cabextract && \
     rm -rf /var/lib/apt/lists/* && \
-    rm winetricks && \
     rm -rf .cache/
 
 # Add the start script
