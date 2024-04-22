@@ -23,7 +23,7 @@ services:
       - SERVER_NAME=[Dockerized] HaloOnline Server \#1
       - SERVER_HOST=Docker
       - RCON_PASSWORD=mypassword
-      - CHAT_LOG=Server.ChatLogFile "logs\chat_server_1.log"
+      - CHAT_LOG=logs/chat_server_1.log
 #      - VOTING_JSON_PATH=data/server/voting_minigames.json
 
 #  eldewrito_server_2:
@@ -50,5 +50,5 @@ services:
 #      - SERVER_NAME=[Dockerized] HaloOnline Server \#2 #UPDATE_PER_SERVER!
 #      - SERVER_HOST=Docker
 #      - RCON_PASSWORD=mypassword
-#      - CHAT_LOG=Server.ChatLogFile "logs\chat_server_2.log" #UPDATE_PER_SERVER!
+#      - CHAT_LOG=logs/chat_server_2.log #UPDATE_PER_SERVER!
 #      - VOTING_JSON_PATH=data/server/voting_minigames.json
