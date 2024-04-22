@@ -10,6 +10,14 @@ The container is running 100% headless - no GUI is required for installation, ex
 
 The game files are required in order to start this container. They are not bundled within the container and you will have to provide them.
 
+## Supported
+
+| Version | Working |
+|-|-|
+| 0.7.0 | Yes |
+| 0.6.x | Untested |
+
+
 ## Usage
 
 Clone this project and edit the `docker-compose.yaml` file according to your preferences or leave as is.
