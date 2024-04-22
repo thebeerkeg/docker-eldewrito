@@ -17,7 +17,6 @@ The game files are required in order to start this container. They are not bundl
 | 0.7.0 | Yes |
 | 0.6.x | Untested |
 
-
 ## Usage
 
 Clone this project and edit the `docker-compose.yaml` file according to your preferences or leave as is.
@@ -75,5 +74,8 @@ You can use `docker-compose logs` to view the logs inside of the container.
 | `PGID` | The group that should own the game, config and logs directories. You also need to set RUN_AS_USER. | 1000 | No |
 | `INSTANCE_ID` | Starts the server in multi instance mode when set. Uses the configuration from /config/dewrito_prefs.cfg. Do not edit any config in your game directory in this mode, they will not be used. Instance identifier must be unique. | - | No |
 | `SKIP_CHOWN` | Skips the chowning on container startup. Speeds up container startup but requires proper directory permissions. | - | No |
-| `WAIT_ON_EXIT` | Set to true or 1 to wait before the container exits. | - | No |
 | `WINE_DEBUG` | Set to true or 1 to get verbose output from Wine. | - | No |
+
+### Credits
+
+Most work for this has been done by [@DomiStyle](https://github.com/DomiStyle): https://github.com/DomiStyle/docker-eldewrito

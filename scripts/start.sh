@@ -97,7 +97,7 @@ Xvfb :1 -screen 0 320x240x24 &
 echo "${GREEN}Starting dedicated server${NC}"
 
 # DLL overrides for Wine are required to prevent issues with master server announcement
-export WINEDLLOVERRIDES="winhttp,rasapi32=n"
+export WINEDLLOVERRIDES="winhttp,rasapi32=b,n"
 
 if [ -n "${WINE_DEBUG}" ]; then
     echo "Setting wine to verbose output"
@@ -111,9 +111,4 @@ else
     su -c "wine eldorado.exe -launcher -dedicated -window -height 200 -width 200 -minimized -instance ${INSTANCE_ID}" $user
 fi
 
-if [ -z "${WAIT_ON_EXIT}" ]; then
-    echo "${RED}Server terminated, exiting${NC}"
-else
-    echo "${RED}Server terminated, waiting${NC}"
-    sleep infinity
-fi
+echo "${RED}Server terminated, exiting${NC}"
