@@ -35,15 +35,8 @@ RUN apt-get remove -y wget software-properties-common apt-transport-https cabext
     rm -rf /var/lib/apt/lists/* && \
     rm -rf .cache/
 
-# Make start script executable and create necessary directories
-RUN chmod +x /scripts/start.sh && \
-    mkdir logs
-
-# Set start command to execute the start script
-CMD /scripts/start.sh
-
-# Set working directory into the game directory
-WORKDIR /game
+# Create necessary directories
+RUN mkdir logs
 
 # Expose necessary ports
 EXPOSE 11774/udp 11775/tcp 11776/tcp 11777/tcp

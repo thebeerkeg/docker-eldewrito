@@ -13,6 +13,8 @@ services:
       - ./eldewrito:/game
       - ./scripts:/scripts
       - ./logs:/logs
+    working_dir: /game
+    command: [ "../scripts/start.sh" ]
     cap_add:
       - SYS_PTRACE
     environment:
