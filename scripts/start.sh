@@ -79,11 +79,11 @@ fi
 
 # Update server settings
 if [ -n "${SERVER_NAME}" ]; then
-    sed -i "s/^Server.Name \"[^\"]*\"/Server.Name \"${SERVER_NAME}\"/" "${CONFIG_FILE}"
+    sed -i "s/^Server.Name \"[^\"]*\"/Server.Name \"${SERVER_NAME}\"/" "${CONFIG_FILE_LINK}"
 fi
 
 if [ -n "${SERVER_HOST}" ]; then
-    sed -i "s/^Player.Name \"[^\"]*\"/Player.Name \"${SERVER_HOST}\"/" "${CONFIG_FILE}"
+    sed -i "s/^Player.Name \"[^\"]*\"/Player.Name \"${SERVER_HOST}\"/" "${CONFIG_FILE_LINK}"
 fi
 
 if [ -z "${SKIP_CHOWN}" ]; then
