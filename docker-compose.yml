@@ -14,7 +14,6 @@ services:
       - ./scripts:/scripts
       - ./logs:/logs
       - ./eldewrito/data:/config
-#      - ./server/0.7.0:/server
     working_dir: /game
     command: [ "sh", "../scripts/start.sh" ]
     cap_add:
@@ -24,5 +23,4 @@ services:
       - INSTANCE_ID=1
       - SERVER_NAME=[Dockerized] HaloOnline Server \#1
       - SERVER_HOST=Docker
-      - VOTING_JSON_PATH=./config/server/voting.json.example
-#      - VOTING_JSON_PATH=./server/voting.json
+#      - VOTING_JSON_PATH=data/server/voting_minigames.json
