@@ -23,4 +23,5 @@ services:
       - INSTANCE_ID=1
       - SERVER_NAME=[Dockerized] HaloOnline Server \#1
       - SERVER_HOST=Docker
+      - RCON_PASSWORD=mypassword
 #      - VOTING_JSON_PATH=data/server/voting_minigames.json

@@ -86,6 +86,10 @@ if [ -n "${SERVER_HOST}" ]; then
     sed -i "s/^Player.Name \"[^\"]*\"/Player.Name \"${SERVER_HOST}\"/" "${CONFIG_FILE_LINK}"
 fi
 
+if [ -n "${RCON_PASSWORD}" ]; then
+    sed -i "s/^Server.RconPassword \"[^\"]*\"/Server.RconPassword \"${RCON_PASSWORD}\"/" "${CONFIG_FILE_LINK}"
+fi
+
 if [ -n "${VOTING_JSON_PATH}" ]; then
     sed -i "s|^Voting.JsonPath \"[^\"]*\"|Voting.JsonPath \"${VOTING_JSON_PATH}\"|" "${CONFIG_FILE_LINK}"
 fi
