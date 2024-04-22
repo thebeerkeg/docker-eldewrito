@@ -78,6 +78,8 @@ else
 fi
 
 # Update server settings
+sed -i "s/^UPnP.Enabled \"[^\"]*\"/UPnP.Enabled \"0\"/" "${CONFIG_FILE_LINK}"
+
 if [ -n "${SERVER_NAME}" ]; then
     sed -i "s/^Server.Name \"[^\"]*\"/Server.Name \"${SERVER_NAME}\"/" "${CONFIG_FILE_LINK}"
 fi
@@ -91,7 +93,7 @@ if [ -n "${RCON_PASSWORD}" ]; then
 fi
 
 if [ -n "${CHAT_LOG}" ]; then
-    sed -i "s/^Server.ChatLogFile \"[^\"]*\"/Server.ChatLogFile \"${CHAT_LOG}\"/" "${CONFIG_FILE_LINK}"
+    sed -i "s|^Server.ChatLogFile \"[^\"]*\"|Server.ChatLogFile \"${CHAT_LOG}\"|" "${CONFIG_FILE_LINK}"
 else
     sed -i "s/^Server.ChatLogEnabled \"[^\"]*\"/Server.ChatLogEnabled \"0\"/" "${CONFIG_FILE_LINK}"
 fi
