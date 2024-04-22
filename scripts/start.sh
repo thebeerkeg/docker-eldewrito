@@ -16,7 +16,7 @@ create_default_config()
 
     if [ -f "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" ]; then
       echo "Copying default dewrito_prefs.cfg for version: ${ED_CFG_VERSION}."
-      cp "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" "$1/dewrito_prefs_${INSTANCE_ID}.cfg"
+      cp "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" "/config/dewrito_prefs_${INSTANCE_ID}.cfg"
       echo "${YELLOW}Make sure to adjust important settings like your RCON password!${NC}"
     else
       echo "${YELLOW}ElDewrito version unknown. dewrito_prefs.cfg will be generated automatically after running. Make sure to update settings like 'Voting.SystemType'.${NC}"
@@ -71,14 +71,14 @@ fi
 if [ -z "${INSTANCE_ID}" ]; then
     echo "${YELLOW}Running in single instance mode.${NC}"
 
-    if [ ! -f "dewrito_prefs.cfg" ]; then
-        create_default_config "."
+    if [ ! -f "/config/dewrito_prefs.cfg" ]; then
+        create_default_config
     fi
 else
     echo "Running in multi instance mode"
 
-    if [ ! -f "dewrito_prefs_${INSTANCE_ID}.cfg" ]; then
-        create_default_config "."
+    if [ ! -f "/config/dewrito_prefs_${INSTANCE_ID}.cfg" ]; then
+        create_default_config
     fi
 fi
 
