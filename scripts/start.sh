@@ -14,7 +14,7 @@ create_default_config()
 
     sleep 5
 
-    if [ -z "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" ]; then
+    if [ -f "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" ]; then
       echo "Copying default dewrito_prefs.cfg for version: ${ED_CFG_VERSION}."
       cp "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" "$1/dewrito_prefs_${INSTANCE_ID}.cfg"
       echo "${YELLOW}Make sure to adjust important settings like your RCON password!${NC}"
@@ -36,7 +36,7 @@ if [ -z "${RUN_AS_USER}" ]; then
     echo "Running as root"
     user=root
 
-    if [ $PUID -ne 0 ] || [ $PGID -ne 0 ]; then
+    if [ "$PUID" -ne 0 ] || [ "$PGID" -ne 0 ]; then
         echo "${RED}Tried to set PUID OR PGID without setting RUN_AS_USER.${NC}"
         echo "${RED}Please set RUN_AS_USER or remove PUID & PGID from your environment variables.${NC}"
 
@@ -47,14 +47,14 @@ else
     echo "Running as eldewrito"
     user=eldewrito
 
-    if [ $PUID -lt 1000 ] || [ $PUID -gt 60000 ]; then
+    if [ "$PUID" -lt 1000 ] || [ "$PUID" -gt 60000 ]; then
         echo "${RED}PUID is invalid${NC}"
 
         sleep 2
         exit 20
     fi
 
-    if [ $PGID -lt 1000 ] || [ $PGID -gt 60000 ]; then
+    if [ "$PGID" -lt 1000 ] || [ "$PGID" -gt 60000 ]; then
         echo "${RED}PGID is invalid${NC}"
 
         sleep 2
@@ -63,7 +63,7 @@ else
 
     if ! id -u eldewrito > /dev/null 2>&1; then
         echo "Creating user"
-        useradd -u $PUID -m -d /tmp/home eldewrito
+        useradd -u "$PUID" -m -d /tmp/home eldewrito
     fi
 fi
 
@@ -84,7 +84,7 @@ fi
 
 if [ -z "${SKIP_CHOWN}" ]; then
     echo "Taking ownership of folders"
-    chown -R $PUID:$PGID /game /logs /wine
+    chown -R "$PUID":"$PGID" /game /logs /wine
 
     echo "Changing folder permissions"
     find /game /logs -type d -exec chmod 775 {} \;
@@ -105,7 +105,7 @@ echo "${GREEN}Starting dedicated server${NC}"
 # DLL overrides for Wine are required to prevent issues with master server announcement
 export WINEDLLOVERRIDES="winhttp,rasapi32=n"
 
-if [ ! -z "${WINE_DEBUG}" ]; then
+if [ -n "${WINE_DEBUG}" ]; then
     echo "Setting wine to verbose output"
     export WINEDEBUG=warn+all
 fi

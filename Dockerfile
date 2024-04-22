@@ -2,8 +2,7 @@
 FROM ubuntu:22.04
 
 # Set environment variables
-ENV CONTAINER_VERSION=1.0 \
-    DISPLAY=:1 \
+ENV DISPLAY=:1 \
     WINEPREFIX="/wine" \
     DEBIAN_FRONTEND=noninteractive \
     PUID=0 \
@@ -38,8 +37,11 @@ RUN apt-get remove -y wget software-properties-common apt-transport-https cabext
 # Create necessary directories
 RUN mkdir logs
 
+# Add the default configuration files
+ADD defaults defaults
+
 # Expose necessary ports
 EXPOSE 11774/udp 11775/tcp 11776/tcp 11777/tcp
 
 # Set volumes
-VOLUME /game /scripts /logs
+VOLUME /game /scripts /logs /config

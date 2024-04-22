@@ -13,6 +13,7 @@ services:
       - ./eldewrito:/game
       - ./scripts:/scripts
       - ./logs:/logs
+      - ./eldewrito/data:/config
     working_dir: /game
     command: [ "sh", "../scripts/start.sh" ]
     cap_add:
