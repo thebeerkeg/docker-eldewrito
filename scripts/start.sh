@@ -86,6 +86,10 @@ if [ -n "${SERVER_HOST}" ]; then
     sed -i "s/^Player.Name \"[^\"]*\"/Player.Name \"${SERVER_HOST}\"/" "${CONFIG_FILE_LINK}"
 fi
 
+if [ -n "${VOTING_JSON_PATH}" ]; then
+    sed -i "s/^Voting.JsonPath \"[^\"]*\"/Voting.JsonPath \"${VOTING_JSON_PATH}\"/" "${CONFIG_FILE_LINK}"
+fi
+
 if [ -z "${SKIP_CHOWN}" ]; then
     echo "Taking ownership of folders"
     chown -R "$PUID":"$PGID" /game /logs /wine
