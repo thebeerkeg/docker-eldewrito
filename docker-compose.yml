@@ -18,4 +18,5 @@ services:
     cap_add:
       - SYS_PTRACE
     environment:
+      - ED_CFG_VERSION=0.7.0
       - INSTANCE_ID=server1

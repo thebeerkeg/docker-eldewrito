@@ -5,7 +5,23 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 
-echo "Initializing v${CONTAINER_VERSION} for ElDewrito"
+echo "Initializing container for ElDewrito Dedicated Server"
+
+# Function to create default configuration depending on path
+create_default_config()
+{
+    echo "${YELLOW}Could not find an existing dewrito_prefs.cfg. Trying to use default.${NC}"
+
+    sleep 5
+
+    if [ -z "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" ]; then
+      echo "Copying default dewrito_prefs.cfg for version: ${ED_CFG_VERSION}."
+      cp "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" "$1/dewrito_prefs_${INSTANCE_ID}.cfg"
+      echo "${YELLOW}Make sure to adjust important settings like your RCON password!${NC}"
+    else
+      echo "${YELLOW}ElDewrito version unknown. dewrito_prefs.cfg will be generated automatically after running. Make sure to update settings like 'Voting.SystemType'.${NC}"
+    fi
+}
 
 # Search for eldorado.exe in game directory
 if [ ! -f "eldorado.exe" ]; then
@@ -48,6 +64,21 @@ else
     if ! id -u eldewrito > /dev/null 2>&1; then
         echo "Creating user"
         useradd -u $PUID -m -d /tmp/home eldewrito
+    fi
+fi
+
+# Copy configuration files or create default config
+if [ -z "${INSTANCE_ID}" ]; then
+    echo "${YELLOW}Running in single instance mode.${NC}"
+
+    if [ ! -f "dewrito_prefs.cfg" ]; then
+        create_default_config "."
+    fi
+else
+    echo "Running in multi instance mode"
+
+    if [ ! -f "dewrito_prefs_${INSTANCE_ID}.cfg" ]; then
+        create_default_config "."
     fi
 fi
 
