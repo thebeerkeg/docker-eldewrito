@@ -5,6 +5,8 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 
+config_file="/config/dewrito_prefs${INSTANCE_ID:+_$INSTANCE_ID}.cfg"
+
 echo "Initializing container for ElDewrito Dedicated Server"
 
 # Function to create default configuration depending on path
@@ -16,7 +18,7 @@ create_default_config()
 
     if [ -f "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" ]; then
         echo "Copying default dewrito_prefs.cfg for version: ${ED_CFG_VERSION}."
-        cp "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" "/config/dewrito_prefs_${INSTANCE_ID}.cfg"
+        cp "/defaults/${ED_CFG_VERSION}/dewrito_prefs.cfg" "${config_file}"
         echo "${YELLOW}Make sure to adjust important settings like your RCON password!${NC}"
     else
         echo "${YELLOW}ElDewrito version unknown. dewrito_prefs.cfg will be generated automatically after running. Make sure to update settings like 'Voting.SystemType'.${NC}"
@@ -68,8 +70,6 @@ else
 fi
 
 # Copy configuration files or create default config
-config_file="/config/dewrito_prefs${INSTANCE_ID:+_$INSTANCE_ID}.cfg"
-
 if [ ! -f "$config_file" ]; then
     create_default_config
 else
