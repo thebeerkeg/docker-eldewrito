@@ -77,6 +77,15 @@ else
     echo "${GREEN}Found existing config: ${CONFIG_FILE}!${NC}"
 fi
 
+# Update server settings
+if [ -n "${SERVER_NAME}" ]; then
+    sed -i "s/^Server.Name \"[^\"]*\"/Server.Name \"${SERVER_NAME}\"/" "${CONFIG_FILE}"
+fi
+
+if [ -n "${SERVER_HOST}" ]; then
+    sed -i "s/^Player.Name \"[^\"]*\"/Player.Name \"${SERVER_HOST}\"/" "${CONFIG_FILE}"
+fi
+
 if [ -z "${SKIP_CHOWN}" ]; then
     echo "Taking ownership of folders"
     chown -R "$PUID":"$PGID" /game /logs /wine

@@ -20,4 +20,6 @@ services:
       - SYS_PTRACE
     environment:
       - ED_CFG_VERSION=0.7.0
-      - INSTANCE_ID=server1
+      - INSTANCE_ID=1
+      - SERVER_NAME=DOCKER TEST \#1 🍺
+      - SERVER_HOST=Docker
