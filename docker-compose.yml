@@ -1,5 +1,5 @@
 services:
-  eldewrito:
+  eldewrito_server_1:
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,7 +12,6 @@ services:
     volumes:
       - ./eldewrito:/game
       - ./scripts:/scripts
-      - ./logs:/logs
       - ./eldewrito/data:/config
     working_dir: /game
     command: [ "sh", "../scripts/start.sh" ]
@@ -24,4 +23,32 @@ services:
       - SERVER_NAME=[Dockerized] HaloOnline Server \#1
       - SERVER_HOST=Docker
       - RCON_PASSWORD=mypassword
+      - CHAT_LOG=Server.ChatLogFile "logs\chat_server_1.log"
+#      - VOTING_JSON_PATH=data/server/voting_minigames.json
+
+#  eldewrito_server_2:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    restart: always
+#    ports:
+#      - "11784:11774/udp" #UPDATE_PER_SERVER!
+#      - "11785:11775/tcp" #UPDATE_PER_SERVER!
+#      - "11786:11776/tcp" #UPDATE_PER_SERVER!
+#      - "11787:11777/tcp" #UPDATE_PER_SERVER!
+#    volumes:
+#      - ./eldewrito:/game
+#      - ./scripts:/scripts
+#      - ./eldewrito/data:/config
+#    working_dir: /game
+#    command: [ "sh", "../scripts/start.sh" ]
+#    cap_add:
+#      - SYS_PTRACE
+#    environment:
+#      - ED_CFG_VERSION=0.7.0
+#      - INSTANCE_ID=2 #UPDATE_PER_SERVER!
+#      - SERVER_NAME=[Dockerized] HaloOnline Server \#2 #UPDATE_PER_SERVER!
+#      - SERVER_HOST=Docker
+#      - RCON_PASSWORD=mypassword
+#      - CHAT_LOG=Server.ChatLogFile "logs\chat_server_2.log" #UPDATE_PER_SERVER!
 #      - VOTING_JSON_PATH=data/server/voting_minigames.json

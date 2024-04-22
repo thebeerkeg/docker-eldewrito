@@ -34,9 +34,6 @@ RUN apt-get remove -y wget software-properties-common apt-transport-https cabext
     rm -rf /var/lib/apt/lists/* && \
     rm -rf .cache/
 
-# Create necessary directories
-RUN mkdir logs
-
 # Add the default configuration files
 ADD defaults defaults
 
@@ -44,4 +41,4 @@ ADD defaults defaults
 EXPOSE 11774/udp 11775/tcp 11776/tcp 11777/tcp
 
 # Set volumes
-VOLUME /game /scripts /logs /config
+VOLUME /game /scripts /config

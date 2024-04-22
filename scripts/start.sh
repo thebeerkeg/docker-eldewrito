@@ -90,19 +90,25 @@ if [ -n "${RCON_PASSWORD}" ]; then
     sed -i "s/^Server.RconPassword \"[^\"]*\"/Server.RconPassword \"${RCON_PASSWORD}\"/" "${CONFIG_FILE_LINK}"
 fi
 
+if [ -n "${CHAT_LOG}" ]; then
+    sed -i "s/^Server.ChatLogFile \"[^\"]*\"/Server.ChatLogFile \"${CHAT_LOG}\"/" "${CONFIG_FILE_LINK}"
+else
+    sed -i "s/^Server.ChatLogEnabled \"[^\"]*\"/Server.ChatLogEnabled \"0\"/" "${CONFIG_FILE_LINK}"
+fi
+
 if [ -n "${VOTING_JSON_PATH}" ]; then
     sed -i "s|^Voting.JsonPath \"[^\"]*\"|Voting.JsonPath \"${VOTING_JSON_PATH}\"|" "${CONFIG_FILE_LINK}"
 fi
 
 if [ -z "${SKIP_CHOWN}" ]; then
     echo "Taking ownership of folders"
-    chown -R "$PUID":"$PGID" /game /logs /wine
+    chown -R "$PUID":"$PGID" /game /wine
 
     echo "Changing folder permissions"
-    find /game /logs -type d -exec chmod 775 {} \;
+    find /game -type d -exec chmod 775 {} \;
 
     echo "Changing file permissions"
-    find /game /logs -type f -exec chmod 664 {} \;
+    find /game -type f -exec chmod 664 {} \;
 fi
 
 # Xvfb needs cleaning because it doesn't exit cleanly
