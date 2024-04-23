@@ -85,19 +85,19 @@ if [ -n "${GAME_PORT}" ]; then
 fi
 
 if [ -n "${PORT}" ]; then
-    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${PORT}\"/" "${CONFIG_FILE_LINK}"
+    sed -i "s/^Server.Port \"[^\"]*\"/Server.Port \"${PORT}\"/" "${CONFIG_FILE_LINK}"
 fi
 
 if [ -n "${RCON_PORT}" ]; then
-    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${RCON_PORT}\"/" "${CONFIG_FILE_LINK}"
+    sed -i "s/^Server.RconPort \"[^\"]*\"/Server.RconPort \"${RCON_PORT}\"/" "${CONFIG_FILE_LINK}"
 fi
 
 if [ -n "${SIGNAL_SERVER_PORT}" ]; then
-    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${SIGNAL_SERVER_PORT}\"/" "${CONFIG_FILE_LINK}"
+    sed -i "s/^Server.SignalServerPort \"[^\"]*\"/Server.SignalServerPort \"${SIGNAL_SERVER_PORT}\"/" "${CONFIG_FILE_LINK}"
 fi
 
 if [ -n "${FILE_SERVER_PORT}" ]; then
-    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${FILE_SERVER_PORT}\"/" "${CONFIG_FILE_LINK}"
+    sed -i "s/^Server.FileServerPort \"[^\"]*\"/Server.FileServerPort \"${FILE_SERVER_PORT}\"/" "${CONFIG_FILE_LINK}"
 fi
 
 if [ -n "${SERVER_NAME}" ]; then
