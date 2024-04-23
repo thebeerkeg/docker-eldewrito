@@ -5,11 +5,11 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - ${GAME_PORT}:${GAME_PORT}/udp
-      - ${PORT}:${PORT}/tcp
-      - ${RCON_PORT}:${RCON_PORT}/tcp
-      - ${SIGNAL_SERVER_PORT}:${SIGNAL_SERVER_PORT}/tcp
-      - ${FILE_SERVER_PORT}:${FILE_SERVER_PORT}
+      - 11774:11774/udp
+      - 11775:11775/tcp
+      - 11776:11776/tcp
+      - 11777:11777/tcp
+      - 11778:11778
     volumes:
       - ./eldewrito:/game
       - ./scripts:/scripts
@@ -38,11 +38,11 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - ${GAME_PORT}:${GAME_PORT}/udp
-      - ${PORT}:${PORT}/tcp
-      - ${RCON_PORT}:${RCON_PORT}/tcp
-      - ${SIGNAL_SERVER_PORT}:${SIGNAL_SERVER_PORT}/tcp
-      - ${FILE_SERVER_PORT}:${FILE_SERVER_PORT}
+      - 11784:11784/udp
+      - 11785:11785/tcp
+      - 11786:11786/tcp
+      - 11787:11787/tcp
+      - 11788:11788
     volumes:
       - ./eldewrito:/game
       - ./scripts:/scripts
