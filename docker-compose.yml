@@ -1,21 +1,64 @@
-version: '2'
-
 services:
-  eldewrito:
-    image: domistyle/eldewrito
+  eldewrito_server_1:
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
+    volumes:
+      - ./eldewrito:/game
+      - ./scripts:/scripts
+      - ./eldewrito/data:/config
+    working_dir: /game
+    command: [ "sh", "../scripts/start.sh" ]
+    cap_add:
+      - SYS_PTRACE
     ports:
       - 11774:11774/udp
       - 11775:11775/tcp
       - 11776:11776/tcp
       - 11777:11777/tcp
+      - 11778:11778
+    environment:
+      - ED_CFG_VERSION=0.7.0
+      - SERVER_HOST=Docker
+      - RCON_PASSWORD=mypassword
+      - GAME_PORT=11774
+      - PORT=11775
+      - RCON_PORT=11776
+      - SIGNAL_SERVER_PORT=11777
+      - FILE_SERVER_PORT=11778
+      - INSTANCE_ID=1
+      - SERVER_NAME=[Dockerized] HaloOnline Server \#1
+      - CHAT_LOG=logs/chat_server_1.log
+
+  eldewrito_server_2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
     volumes:
-      - /path/to/game:/game
-      - /path/to/config:/config
-      - /path/to/logs:/logs
+      - ./eldewrito:/game
+      - ./scripts:/scripts
+      - ./eldewrito/data:/config
+    working_dir: /game
+    command: [ "sh", "../scripts/start.sh" ]
     cap_add:
       - SYS_PTRACE
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - INSTANCE_ID=srv1
+    ports:
+      - 11784:11784/udp
+      - 11785:11785/tcp
+      - 11786:11786/tcp
+      - 11787:11787/tcp
+      - 11788:11788
+    environment:
+      - ED_CFG_VERSION=0.7.0
+      - SERVER_HOST=Docker
+      - RCON_PASSWORD=mypassword
+      - GAME_PORT=11784
+      - PORT=11785
+      - RCON_PORT=11786
+      - SIGNAL_SERVER_PORT=11787
+      - FILE_SERVER_PORT=11788
+      - INSTANCE_ID=2
+      - SERVER_NAME=[Dockerized] HaloOnline Server \#2
+      - CHAT_LOG=logs/chat_server_2.log
