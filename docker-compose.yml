@@ -1,5 +1,5 @@
 services:
-  eldewrito_server_base: &base
+  eldewrito_server_1:
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,9 +12,6 @@ services:
     command: [ "sh", "../scripts/start.sh" ]
     cap_add:
       - SYS_PTRACE
-
-  eldewrito_server_1:
-    <<: *base
     ports:
       - 11774:11774/udp
       - 11775:11775/tcp
@@ -35,7 +32,18 @@ services:
       - CHAT_LOG=logs/chat_server_1.log
 
   eldewrito_server_2:
-    <<: *base
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./eldewrito:/game
+      - ./scripts:/scripts
+      - ./eldewrito/data:/config
+    working_dir: /game
+    command: [ "sh", "../scripts/start.sh" ]
+    cap_add:
+      - SYS_PTRACE
     ports:
       - 11784:11784/udp
       - 11785:11785/tcp
