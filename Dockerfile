@@ -37,8 +37,5 @@ RUN apt-get remove -y wget software-properties-common apt-transport-https cabext
 # Add the default configuration files
 ADD defaults defaults
 
-# Expose necessary ports
-EXPOSE 11774/udp 11775/tcp 11776/tcp 11777/tcp 11778
-
 # Set volumes
 VOLUME /game /scripts /config

@@ -80,6 +80,26 @@ fi
 # Update server settings
 sed -i "s/^UPnP.Enabled \"[^\"]*\"/UPnP.Enabled \"0\"/" "${CONFIG_FILE_LINK}"
 
+if [ -n "${GAME_PORT}" ]; then
+    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${GAME_PORT}\"/" "${CONFIG_FILE_LINK}"
+fi
+
+if [ -n "${PORT}" ]; then
+    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${PORT}\"/" "${CONFIG_FILE_LINK}"
+fi
+
+if [ -n "${RCON_PORT}" ]; then
+    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${RCON_PORT}\"/" "${CONFIG_FILE_LINK}"
+fi
+
+if [ -n "${SIGNAL_SERVER_PORT}" ]; then
+    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${SIGNAL_SERVER_PORT}\"/" "${CONFIG_FILE_LINK}"
+fi
+
+if [ -n "${FILE_SERVER_PORT}" ]; then
+    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${FILE_SERVER_PORT}\"/" "${CONFIG_FILE_LINK}"
+fi
+
 if [ -n "${SERVER_NAME}" ]; then
     sed -i "s/^Server.Name \"[^\"]*\"/Server.Name \"${SERVER_NAME}\"/" "${CONFIG_FILE_LINK}"
 fi

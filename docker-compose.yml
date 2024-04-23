@@ -5,11 +5,11 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "11774:11774/udp"
-      - "11775:11775/tcp"
-      - "11776:11776/tcp"
-      - "11777:11777/tcp"
-      - "11778:11778"
+      - "${GAME_PORT}:${GAME_PORT}/udp"
+      - "${PORT}:${PORT}/tcp"
+      - "${RCON_PORT}:${RCON_PORT}/tcp"
+      - "${SIGNAL_SERVER_PORT}:${SIGNAL_SERVER_PORT}/tcp"
+      - "${FILE_SERVER_PORT}:${FILE_SERVER_PORT}"
     volumes:
       - ./eldewrito:/game
       - ./scripts:/scripts
@@ -19,6 +19,11 @@ services:
     cap_add:
       - SYS_PTRACE
     environment:
+      - GAME_PORT=11774
+      - PORT=11775
+      - RCON_PORT=11776
+      - SIGNAL_SERVER_PORT=11777
+      - FILE_SERVER_PORT=11778
       - ED_CFG_VERSION=0.7.0
       - INSTANCE_ID=1
       - SERVER_NAME=[Dockerized] HaloOnline Server \#1
@@ -33,11 +38,11 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "11784:11774/udp" #UPDATE_PER_SERVER!
-      - "11785:11775/tcp" #UPDATE_PER_SERVER!
-      - "11786:11776/tcp" #UPDATE_PER_SERVER!
-      - "11787:11777/tcp" #UPDATE_PER_SERVER!
-      - "11788:11788" #UPDATE_PER_SERVER!
+      - "${GAME_PORT}:${GAME_PORT}/udp"
+      - "${PORT}:${PORT}/tcp"
+      - "${RCON_PORT}:${RCON_PORT}/tcp"
+      - "${SIGNAL_SERVER_PORT}:${SIGNAL_SERVER_PORT}/tcp"
+      - "${FILE_SERVER_PORT}:${FILE_SERVER_PORT}"
     volumes:
       - ./eldewrito:/game
       - ./scripts:/scripts
@@ -47,6 +52,11 @@ services:
     cap_add:
       - SYS_PTRACE
     environment:
+      - GAME_PORT=11784 #UPDATE_PER_SERVER!
+      - PORT=11785 #UPDATE_PER_SERVER!
+      - RCON_PORT=11786 #UPDATE_PER_SERVER!
+      - SIGNAL_SERVER_PORT=11787 #UPDATE_PER_SERVER!
+      - FILE_SERVER_PORT=11788 #UPDATE_PER_SERVER!
       - ED_CFG_VERSION=0.7.0
       - INSTANCE_ID=2 #UPDATE_PER_SERVER!
       - SERVER_NAME=[Dockerized] HaloOnline Server \#2 #UPDATE_PER_SERVER!
