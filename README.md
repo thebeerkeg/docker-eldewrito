@@ -53,8 +53,9 @@ You can use `docker-compose logs` to view the logs inside of the container.
 |------------|----------|-------------|
 | `11774` | UDP | Used for the game traffic |
 | `11775` | TCP | Runs the HTTP server used for communication with clients |
-| `11776` | TCP | Used for controlling the server via RCon |
+| `11776` | TCP | Used for controlling the server via RCON |
 | `11777` | TCP | VoIP |
+| `11778` | TCP | File Server |
 
 ### Volumes
 
