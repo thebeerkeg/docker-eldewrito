@@ -89,7 +89,7 @@ if [ -n "${PORT}" ]; then
 fi
 
 if [ -n "${RCON_PORT}" ]; then
-    sed -i "s/^Server.RconPort \"[^\"]*\"/Server.RconPort \"${RCON_PORT}\"/" "${CONFIG_FILE_LINK}"
+    sed -i "s/^Game.RconPort \"[^\"]*\"/Game.RconPort \"${RCON_PORT}\"/" "${CONFIG_FILE_LINK}"
 fi
 
 if [ -n "${SIGNAL_SERVER_PORT}" ]; then
