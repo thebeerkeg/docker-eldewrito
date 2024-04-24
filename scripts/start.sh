@@ -95,7 +95,10 @@ update_setting "Server.SignalServerPort" "$SIGNAL_SERVER_PORT"
 update_setting "Server.FileServerPort" "$FILE_SERVER_PORT"
 update_setting "Server.Name" "$SERVER_NAME"
 update_setting "Player.Name" "$SERVER_HOST"
+update_setting "Server.Message" "$SERVER_MESSAGE"
 update_setting "Server.RconPassword" "$RCON_PASSWORD"
+update_setting "Voting.SystemType" "$VOTING_SYSTEM_TYPE"
+update_setting "Voting.VoteTime" "$VOTING_TIME"
 
 if [ -n "$CHAT_LOG" ]; then
     update_setting "Server.ChatLogEnabled" "1" "${CONFIG_FILE_LINK}"

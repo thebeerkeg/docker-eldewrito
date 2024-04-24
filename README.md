@@ -78,25 +78,28 @@ Duplicate the `eldewrito_server_1` service in your `docker-compose.yml`. Then se
 
 ### Environment variables
 
-| Variable             | Description                                                                                                                                                 | Default  | Required |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|----------|
+| Variable             | Description                                                                                                                                                | Default  | Required |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|----------|
 | `INSTANCE_ID`        | Starts the server in multi instance mode when set. Uses the configuration from /config/dewrito_prefs_[INSTANCE_ID].cfg. Instance identifier must be unique. | - | No |
-| `ED_CFG_VERSION`     | Optional but recommended. Helps the container grab the default config for our server.                                                                       | - | No |
-| `SERVER_NAME`        | Name of your server.                                                                                                                                        | - | No |
-| `SERVER_HOST`        | Name of the server host that will appear in the server browser.                                                                                             | - | No |
-| `RCON_PASSWORD`      | RCON password.                                                                                                                                              | - | No |
-| `GAME_PORT`          | Game port.                                                                                                                                                  | - | No |
-| `PORT`               | Port.                                                                                                                                                       | - | No |
-| `RCON_PORT`          | RCON port.                                                                                                                                                  | - | No |
-| `SIGNAL_SERVER_PORT` | VOIP port.                                                                                                                                                  | - | No |
-| `FILE_SERVER_PORT`   | File server port.                                                                                                                                           | - | No |
-| `VOTING_JSON_PATH`   | Set this to the file path of your `voting.json` file relative to your ED install directory. Example: `data/server/voting.json`.                             | - | No |
-| `CHAT_LOG`           | Path to the chat log file. Comment this out to disable the chat log. Should be unique per server.                                                           | - | No |
-| `RUN_AS_USER`        | Set to true or 1 to run as user instead of root.                                                                                                            | - | No |
-| `PUID`               | The user that the game server should be started as. You also need to set RUN_AS_USER.                                                                       | 1000 | No |
-| `PGID`               | The group that should own the game, config and logs directories. You also need to set RUN_AS_USER.                                                          | 1000 | No |
-| `SKIP_CHOWN`         | Skips the chowning on container startup. Speeds up container startup but requires proper directory permissions.                                             | - | No |
-| `WINE_DEBUG`         | Set to true or 1 to get verbose output from Wine.                                                                                                           | - | No |
+| `ED_CFG_VERSION`     | Optional but recommended. Helps the container grab the default config for our server.                                                                      | - | No |
+| `SERVER_NAME`        | Name of your server.                                                                                                                                       | - | No |
+| `SERVER_HOST`        | Name of the server host that will appear in the server browser.                                                                                            | - | No |
+| `SERVER_MESSAGE`     | Server message that will display on loading screens.                                                                                                       | - | No |
+| `RCON_PASSWORD`      | RCON password.                                                                                                                                             | - | No |
+| `GAME_PORT`          | Game port.                                                                                                                                                 | - | No |
+| `PORT`               | Port.                                                                                                                                                      | - | No |
+| `RCON_PORT`          | RCON port.                                                                                                                                                 | - | No |
+| `SIGNAL_SERVER_PORT` | VOIP port.                                                                                                                                                 | - | No |
+| `FILE_SERVER_PORT`   | File server port.                                                                                                                                          | - | No |
+| `VOTING_JSON_PATH`   | Set this to the file path of your `voting.json` file relative to your ED install directory. Example: `data/server/voting.json`.                            | - | No |
+| `VOTING_SYSTEM_TYPE` | "1": Vote for maps. "2": Veto maps. "0": Host manually starts a match.                                                                                     | - | No |
+| `VOTING_TIME`        | Time users will have to vote or veto a map.                                                                                                                | - | No |
+| `CHAT_LOG`           | Path to the chat log file. Comment this out to disable the chat log. Should be unique per server.                                                          | - | No |
+| `RUN_AS_USER`        | Set to true or 1 to run as user instead of root.                                                                                                           | - | No |
+| `PUID`               | The user that the game server should be started as. You also need to set RUN_AS_USER.                                                                      | 1000 | No |
+| `PGID`               | The group that should own the game, config and logs directories. You also need to set RUN_AS_USER.                                                         | 1000 | No |
+| `SKIP_CHOWN`         | Skips the chowning on container startup. Speeds up container startup but requires proper directory permissions.                                            | - | No |
+| `WINE_DEBUG`         | Set to true or 1 to get verbose output from Wine.                                                                                                          | - | No |
 
 ### Credits
 

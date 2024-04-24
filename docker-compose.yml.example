@@ -27,7 +27,10 @@ services:
       - FILE_SERVER_PORT=11778
       - INSTANCE_ID=1
       - SERVER_NAME=[Dockerized] HaloOnline Server \#1
+      - SERVER_MESSAGE=Welcome to my server!
       - CHAT_LOG=logs/chat_server_1.log
+      - VOTING_SYSTEM_TYPE=1
+      - VOTING_TIME=15
 #      - VOTING_JSON_PATH=data/server/voting.json
 
 #  eldewrito_server_2:
@@ -58,4 +61,7 @@ services:
 #      - FILE_SERVER_PORT=11788
 #      - INSTANCE_ID=2
 #      - SERVER_NAME=[Dockerized] HaloOnline Server \#2
+#      - SERVER_MESSAGE=Welcome to my server!
 #      - CHAT_LOG=logs/chat_server_2.log
+#      - VOTING_SYSTEM_TYPE=1
+#      - VOTING_TIME=15
