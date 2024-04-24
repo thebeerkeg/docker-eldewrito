@@ -11,7 +11,7 @@ ENV DISPLAY=:1 \
 
 # Install temporary packages
 RUN apt-get update && \
-    apt-get install -y wget software-properties-common apt-transport-https cabextract xvfb winbind
+    apt-get install -y wget curl software-properties-common apt-transport-https cabextract xvfb winbind
 
 # Enable 32-bit
 RUN dpkg --add-architecture i386 && apt-get update

@@ -144,6 +144,8 @@ if [ -n "${WINE_DEBUG}" ]; then
     export WINEDEBUG=warn+all
 fi
 
+# Servers do not automatically announce to the master servers for some reason when run
+# inside a Docker container. Visiting the server's info server somehow fixes this..
 send_get_request &
 
 if [ -z "${INSTANCE_ID}" ]; then
