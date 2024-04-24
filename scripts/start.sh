@@ -113,6 +113,7 @@ if [ -n "${RCON_PASSWORD}" ]; then
 fi
 
 if [ -n "${CHAT_LOG}" ]; then
+    sed -i "s/^Server.ChatLogEnabled \"[^\"]*\"/Server.ChatLogEnabled \"1\"/" "${CONFIG_FILE_LINK}"
     sed -i "s|^Server.ChatLogFile \"[^\"]*\"|Server.ChatLogFile \"${CHAT_LOG}\"|" "${CONFIG_FILE_LINK}"
 else
     sed -i "s/^Server.ChatLogEnabled \"[^\"]*\"/Server.ChatLogEnabled \"0\"/" "${CONFIG_FILE_LINK}"
@@ -143,11 +144,11 @@ Xvfb :1 -screen 0 320x240x24 &
 echo "${GREEN}Starting dedicated server${NC}"
 
 # DLL overrides for Wine are required to prevent issues with master server announcement
-export WINEDLLOVERRIDES="winhttp,rasapi32=b,n"
+export WINEDLLOVERRIDES="winhttp=n,b,rasapi32=n,b"
 
-if [ -n "${WINE_DEBUG}" ] || true; then
+if [ -n "${WINE_DEBUG}" ]; then
     echo "Setting wine to verbose output"
-    export WINEDEBUG=warn+all
+    export WINEDEBUG=-all
 fi
 
 if [ -z "${INSTANCE_ID}" ]; then

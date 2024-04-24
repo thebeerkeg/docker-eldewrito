@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 
 # Set environment variables
 ENV DISPLAY=:1 \
+    WINEARCH=win32 \
     WINEPREFIX="/wine" \
     DEBIAN_FRONTEND=noninteractive \
     PUID=0 \
