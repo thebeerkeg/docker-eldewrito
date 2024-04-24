@@ -24,7 +24,7 @@ RUN apt-get install -y wine32 winetricks
 RUN Xvfb :1 -screen 0 320x240x24 & \
     WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -u && \
     wineserver -w && \
-    winetricks -q vcrun2012 winhttp d3dcompiler_47 d3dx9
+    winetricks -q vcrun2012
 
 #Install libvulkan and libgll
 RUN apt-get install -y libvulkan1:i386 && \

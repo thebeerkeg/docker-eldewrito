@@ -11,8 +11,7 @@ CONFIG_FILE_LINK="/config/${CONFIG_FILE}"
 echo "Initializing container for ElDewrito Dedicated Server"
 
 # Function to create default configuration depending on path
-create_default_config()
-{
+create_default_config() {
     echo "${YELLOW}Could not find an existing dewrito_prefs.cfg. Trying to use default.${NC}"
 
     sleep 5
@@ -23,6 +22,15 @@ create_default_config()
         echo "${YELLOW}Make sure to adjust important settings like your RCON password!${NC}"
     else
         echo "${YELLOW}ElDewrito version unknown. ${CONFIG_FILE} will be generated automatically after running. Make sure to update settings like 'Voting.SystemType'.${NC}"
+    fi
+}
+
+update_setting() {
+    setting="$1"
+    value="$2"
+
+    if [ -n "$value" ]; then
+        sed -i "s|^$setting \"[^\"]*\"|$setting \"$value\"|" "$CONFIG_FILE_LINK"
     fi
 }
 
@@ -77,51 +85,25 @@ else
     echo "${GREEN}Found existing config: ${CONFIG_FILE}!${NC}"
 fi
 
-# Update server settings
-sed -i "s/^UPnP.Enabled \"[^\"]*\"/UPnP.Enabled \"0\"/" "${CONFIG_FILE_LINK}"
+# Update dewrito_prefs
+update_setting "UPnP.Enabled" "1"
+update_setting "Server.GamePort" "$GAME_PORT"
+update_setting "Server.Port" "$PORT"
+update_setting "Game.RconPort" "$RCON_PORT"
+update_setting "Server.SignalServerPort" "$SIGNAL_SERVER_PORT"
+update_setting "Server.FileServerPort" "$FILE_SERVER_PORT"
+update_setting "Server.Name" "$SERVER_NAME"
+update_setting "Player.Name" "$SERVER_HOST"
+update_setting "Server.RconPassword" "$RCON_PASSWORD"
 
-if [ -n "${GAME_PORT}" ]; then
-    sed -i "s/^Server.GamePort \"[^\"]*\"/Server.GamePort \"${GAME_PORT}\"/" "${CONFIG_FILE_LINK}"
-fi
-
-if [ -n "${PORT}" ]; then
-    sed -i "s/^Server.Port \"[^\"]*\"/Server.Port \"${PORT}\"/" "${CONFIG_FILE_LINK}"
-fi
-
-if [ -n "${RCON_PORT}" ]; then
-    sed -i "s/^Game.RconPort \"[^\"]*\"/Game.RconPort \"${RCON_PORT}\"/" "${CONFIG_FILE_LINK}"
-fi
-
-if [ -n "${SIGNAL_SERVER_PORT}" ]; then
-    sed -i "s/^Server.SignalServerPort \"[^\"]*\"/Server.SignalServerPort \"${SIGNAL_SERVER_PORT}\"/" "${CONFIG_FILE_LINK}"
-fi
-
-if [ -n "${FILE_SERVER_PORT}" ]; then
-    sed -i "s/^Server.FileServerPort \"[^\"]*\"/Server.FileServerPort \"${FILE_SERVER_PORT}\"/" "${CONFIG_FILE_LINK}"
-fi
-
-if [ -n "${SERVER_NAME}" ]; then
-    sed -i "s/^Server.Name \"[^\"]*\"/Server.Name \"${SERVER_NAME}\"/" "${CONFIG_FILE_LINK}"
-fi
-
-if [ -n "${SERVER_HOST}" ]; then
-    sed -i "s/^Player.Name \"[^\"]*\"/Player.Name \"${SERVER_HOST}\"/" "${CONFIG_FILE_LINK}"
-fi
-
-if [ -n "${RCON_PASSWORD}" ]; then
-    sed -i "s/^Server.RconPassword \"[^\"]*\"/Server.RconPassword \"${RCON_PASSWORD}\"/" "${CONFIG_FILE_LINK}"
-fi
-
-if [ -n "${CHAT_LOG}" ]; then
-    sed -i "s/^Server.ChatLogEnabled \"[^\"]*\"/Server.ChatLogEnabled \"1\"/" "${CONFIG_FILE_LINK}"
-    sed -i "s|^Server.ChatLogFile \"[^\"]*\"|Server.ChatLogFile \"${CHAT_LOG}\"|" "${CONFIG_FILE_LINK}"
+if [ -n "$CHAT_LOG" ]; then
+    update_setting "Server.ChatLogEnabled" "1" "${CONFIG_FILE_LINK}"
+    update_setting "Server.ChatLogFile" "$CHAT_LOG" "${CONFIG_FILE_LINK}"
 else
-    sed -i "s/^Server.ChatLogEnabled \"[^\"]*\"/Server.ChatLogEnabled \"0\"/" "${CONFIG_FILE_LINK}"
+    update_setting "Server.ChatLogEnabled" "0" "${CONFIG_FILE_LINK}"
 fi
 
-if [ -n "${VOTING_JSON_PATH}" ]; then
-    sed -i "s|^Voting.JsonPath \"[^\"]*\"|Voting.JsonPath \"${VOTING_JSON_PATH}\"|" "${CONFIG_FILE_LINK}"
-fi
+update_setting "Voting.JsonPath" "$VOTING_JSON_PATH" "${CONFIG_FILE_LINK}"
 
 if [ -z "${SKIP_CHOWN}" ]; then
     echo "Taking ownership of folders"
@@ -144,7 +126,7 @@ Xvfb :1 -screen 0 320x240x24 &
 echo "${GREEN}Starting dedicated server${NC}"
 
 # DLL overrides for Wine are required to prevent issues with master server announcement
-export WINEDLLOVERRIDES="winhttp=n,b,rasapi32=n,b"
+# export WINEDLLOVERRIDES="winhttp=n,b,rasapi32=n,b"
 
 if [ -n "${WINE_DEBUG}" ]; then
     echo "Setting wine to verbose output"
