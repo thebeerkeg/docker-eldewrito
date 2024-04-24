@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 
 # Set environment variables
 ENV DISPLAY=:1 \
+    WINEARCH=win32 \
     WINEPREFIX="/wine" \
     DEBIAN_FRONTEND=noninteractive \
     PUID=0 \
@@ -10,7 +11,7 @@ ENV DISPLAY=:1 \
 
 # Install temporary packages
 RUN apt-get update && \
-    apt-get install -y wget software-properties-common apt-transport-https cabextract xvfb winbind
+    apt-get install -y wget curl software-properties-common apt-transport-https cabextract xvfb winbind
 
 # Enable 32-bit
 RUN dpkg --add-architecture i386 && apt-get update
@@ -23,7 +24,7 @@ RUN apt-get install -y wine32 winetricks
 RUN Xvfb :1 -screen 0 320x240x24 & \
     WINEDLLOVERRIDES="mscoree,mshtml=" wineboot -u && \
     wineserver -w && \
-    winetricks -q vcrun2012 winhttp
+    winetricks -q vcrun2012
 
 #Install libvulkan and libgll
 RUN apt-get install -y libvulkan1:i386 && \
