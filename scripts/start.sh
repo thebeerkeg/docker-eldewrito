@@ -125,9 +125,6 @@ Xvfb :1 -screen 0 320x240x24 &
 
 echo "${GREEN}Starting dedicated server${NC}"
 
-# DLL overrides for Wine are required to prevent issues with master server announcement
-# export WINEDLLOVERRIDES="winhttp=n,b,rasapi32=n,b"
-
 if [ -n "${WINE_DEBUG}" ]; then
     echo "Setting wine to verbose output"
     export WINEDEBUG=-all
