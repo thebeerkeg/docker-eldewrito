@@ -10,6 +10,16 @@ CONFIG_FILE_LINK="/config/${CONFIG_FILE}"
 
 echo "Initializing container for ElDewrito Dedicated Server"
 
+# Function to send GET request to a local URL
+send_get_request() {
+    # Sleep for a few seconds to allow eldorado.exe to start
+    sleep 30
+
+    # Send GET request to a local URL
+    echo "Sending GET request to info server"
+    curl -X GET "http://localhost:${PORT}"
+}
+
 # Function to create default configuration depending on path
 create_default_config() {
     echo "${YELLOW}Could not find an existing dewrito_prefs.cfg. Trying to use default.${NC}"
@@ -133,6 +143,8 @@ if [ -n "${WINE_DEBUG}" ]; then
     echo "Setting wine to verbose output"
     export WINEDEBUG=warn+all
 fi
+
+send_get_request &
 
 if [ -z "${INSTANCE_ID}" ]; then
     su -c "wine eldorado.exe -launcher -dedicated -window -height 200 -width 200 -minimized" $user
