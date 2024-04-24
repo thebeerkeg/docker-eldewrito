@@ -128,7 +128,7 @@ echo "${GREEN}Starting dedicated server${NC}"
 
 if [ -n "${WINE_DEBUG}" ]; then
     echo "Setting wine to verbose output"
-    export WINEDEBUG=-all,fixme-all
+    export WINEDEBUG=warn+all
 fi
 
 if [ -z "${INSTANCE_ID}" ]; then
