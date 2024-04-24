@@ -86,7 +86,7 @@ else
 fi
 
 # Update dewrito_prefs
-update_setting "UPnP.Enabled" "1"
+update_setting "UPnP.Enabled" "0" # Not needed and will only error
 update_setting "Game.Discord.Enable" "0"
 update_setting "Server.GamePort" "$GAME_PORT"
 update_setting "Server.Port" "$PORT"
