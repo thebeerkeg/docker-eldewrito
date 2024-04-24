@@ -11,9 +11,9 @@ CONFIG_FILE_LINK="/config/${CONFIG_FILE}"
 echo "Initializing container for ElDewrito Dedicated Server"
 
 # Function to send GET request to a local URL
-send_get_request() {
+send_info_server_request() {
     # Sleep for a few seconds to allow eldorado.exe to start
-    sleep 30
+    sleep 20
 
     # Send GET request to a local URL
     echo "Sending GET request to info server"
@@ -146,7 +146,7 @@ fi
 
 # Servers do not automatically announce to the master servers for some reason when run
 # inside a Docker container. Visiting the server's info server somehow fixes this..
-send_get_request &
+send_info_server_request &
 
 if [ -z "${INSTANCE_ID}" ]; then
     su -c "wine eldorado.exe -launcher -dedicated -window -height 200 -width 200 -minimized" $user
