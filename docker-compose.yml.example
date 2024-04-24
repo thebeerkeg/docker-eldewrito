@@ -1,8 +1,15 @@
 services:
-  eldewrito_server_1:
+  _image_build:
+    image: eldewrito:image
+    command: ['echo', 'build completed']
     build:
       context: .
       dockerfile: Dockerfile
+
+  eldewrito_server_1:
+    image: eldewrito:image
+    depends_on:
+        - _image_build
     restart: always
     volumes:
       - ./eldewrito:/game
@@ -34,9 +41,9 @@ services:
 #      - VOTING_JSON_PATH=data/server/voting.json
 
 #  eldewrito_server_2:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
+#    image: eldewrito:image
+#    depends_on:
+#      - _image_build
 #    restart: always
 #    volumes:
 #      - ./eldewrito:/game
