@@ -145,7 +145,7 @@ echo "${GREEN}Starting dedicated server${NC}"
 # DLL overrides for Wine are required to prevent issues with master server announcement
 export WINEDLLOVERRIDES="winhttp,rasapi32=b,n"
 
-if [ -n "${WINE_DEBUG}" ]; then
+if [ -n "${WINE_DEBUG}" ] || true; then
     echo "Setting wine to verbose output"
     export WINEDEBUG=warn+all
 fi
